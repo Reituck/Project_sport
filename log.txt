@@ -1,0 +1,85 @@
+[2025-07-20 22:33:31] submit_comment | user: dymkova_aa | comment: работай
+[2025-07-20 22:33:31] view_index | user: dymkova_aa
+[2025-07-20 22:35:54] view_choose_sport | user: dymkova_aa
+[2025-07-20 22:35:59] view_choose_sport | user: dymkova_aa
+[2025-07-20 22:36:01] view_choose_sport | user: dymkova_aa
+[2025-07-20 22:36:02] view_choose_sport | user: dymkova_aa
+[2025-07-20 22:36:04] view_sport | user: dymkova_aa | sport: football
+[2025-07-20 22:36:06] logout | user: dymkova_aa
+[2025-07-20 22:36:13] view_choose_sport | user: dymkova_aa
+[2025-07-20 22:37:08] view_choose_sport | user: dymkova_aa
+[2025-07-20 22:37:11] view_choose_sport | user: dymkova_aa
+[2025-07-20 22:37:18] view_choose_sport | user: dymkova_aa
+[2025-07-20 22:37:25] view_choose_sport | user: dymkova_aa
+[2025-07-20 22:37:27] view_choose_sport | user: dymkova_aa
+[2025-07-20 22:38:39] view_choose_sport | user: dymkova_aa
+[2025-07-20 22:38:41] logout | user: dymkova_aa
+[2025-07-20 22:38:48] view_choose_sport | user: dymkova_aa
+[2025-07-20 22:38:52] logout | user: dymkova_aa
+[2025-07-20 22:39:37] logout | user: dymkova_aa
+[2025-07-20 22:39:37] view_choose_sport | user: -
+[2025-07-20 22:39:41] login_success | user: dymkova_aa
+[2025-07-20 22:39:41] view_choose_sport | user: dymkova_aa
+[2025-07-20 22:39:42] logout | user: dymkova_aa
+[2025-07-20 22:39:42] view_choose_sport | user: -
+[2025-07-20 22:41:04] view_choose_sport | user: -
+[2025-07-20 22:42:23] register_fail_exists | user: dymkova_aa
+[2025-07-20 22:42:26] register_success | user: паыи
+[2025-07-20 22:42:26] view_choose_sport | user: паыи
+[2025-07-20 22:42:29] logout | user: паыи
+[2025-07-20 22:42:29] view_choose_sport | user: -
+[2025-07-20 22:42:34] view_choose_sport | user: -
+[2025-07-21 08:15:33] view_choose_sport | user: -
+[2025-07-21 08:15:37] view_choose_sport | user: -
+[2025-07-21 08:15:50] view_choose_sport | user: -
+[2025-07-21 08:15:54] view_choose_sport | user: -
+[2025-07-21 08:15:55] view_choose_sport | user: -
+[2025-07-21 08:17:46] view_choose_sport | user: -
+[2025-07-21 08:17:48] view_choose_sport | user: -
+[2025-07-21 08:17:58] view_choose_sport | user: -
+[2025-07-21 08:18:05] login_success | user: dymkova_aa
+[2025-07-21 08:18:05] view_choose_sport | user: dymkova_aa
+[2025-07-21 08:18:08] logout | user: dymkova_aa
+[2025-07-21 08:18:08] view_choose_sport | user: -
+[2025-07-21 08:18:14] view_sport | user: - | sport: swimming
+[2025-07-21 08:18:19] view_choose_sport | user: -
+[2025-07-21 08:19:54] view_choose_sport | user: -
+[2025-07-21 08:19:55] view_choose_sport | user: -
+[2025-07-21 08:19:55] view_choose_sport | user: -
+[2025-07-21 08:19:56] view_choose_sport | user: -
+[2025-07-21 08:19:56] view_choose_sport | user: -
+[2025-07-21 08:19:56] view_choose_sport | user: -
+[2025-07-21 08:19:56] view_choose_sport | user: -
+[2025-07-21 08:19:56] view_choose_sport | user: -
+[2025-07-21 08:19:56] view_choose_sport | user: -
+[2025-07-21 08:19:57] view_choose_sport | user: -
+[2025-07-21 08:19:57] view_choose_sport | user: -
+[2025-07-21 08:19:57] view_choose_sport | user: -
+[2025-07-21 08:22:53] view_choose_sport | user: -
+[2025-07-21 08:22:54] view_sport | user: - | sport: volleyball
+[2025-07-21 08:22:59] view_sport | user: - | sport: football
+[2025-07-21 08:23:03] view_choose_sport | user: -
+[2025-07-21 08:23:04] view_choose_sport | user: -
+[2025-07-21 08:23:04] view_choose_sport | user: -
+[2025-07-21 08:23:04] view_choose_sport | user: -
+[2025-07-21 08:23:21] view_choose_sport | user: -
+[2025-07-21 08:23:24] view_sport | user: - | sport: basketball
+[2025-07-21 08:26:16] view_choose_sport | user: -
+[2025-07-21 08:29:47] view_choose_sport | user: -
+[2025-07-21 08:34:57] view_choose_sport | user: -
+[2025-07-21 08:36:20] view_choose_sport | user: -
+[2025-07-21 08:41:03] view_choose_sport | user: -
+[2025-07-21 08:41:20] view_sport | user: - | sport: athletics
+[2025-07-21 08:41:27] view_choose_sport | user: -
+[2025-07-21 08:41:35] view_sport | user: - | sport: hockey
+[2025-07-21 08:41:38] view_sport | user: - | sport: swimming
+[2025-07-21 08:41:51] view_sport | user: - | sport: gymnastics
+[2025-07-21 08:45:51] view_choose_sport | user: -
+[2025-07-21 08:45:59] view_sport | user: - | sport: football
+[2025-07-21 08:46:24] view_choose_sport | user: -
+[2025-07-21 08:57:48] view_choose_sport | user: -
+[2025-07-21 08:57:56] view_sport | user: - | sport: gymnastics
+[2025-07-21 08:59:39] view_choose_sport | user: -
+[2025-07-21 09:01:49] view_choose_sport | user: -
+[2025-07-21 09:02:11] view_sport | user: - | sport: gymnastics
+[2025-07-21 09:03:29] view_choose_sport | user: -
