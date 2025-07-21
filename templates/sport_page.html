@@ -1,0 +1,100 @@
+{% include 'header.html' %}
+<div class="sport-info-card">
+  <div class="sport-info-flex">
+    <div class="sport-img">
+      {% if sport['slug'] == 'football' %}
+        <svg width="90" height="90"><circle cx="45" cy="45" r="40" fill="#2563eb" stroke="#bae6fd" stroke-width="8"/><circle cx="45" cy="45" r="18" fill="#fff"/></svg>
+      {% elif sport['slug'] == 'tennis' %}
+        <svg width="90" height="90"><ellipse cx="45" cy="45" rx="38" ry="28" fill="#bae6fd" stroke="#2563eb" stroke-width="6"/><ellipse cx="45" cy="45" rx="18" ry="10" fill="#fff"/></svg>
+      {% elif sport['slug'] == 'gymnastics' %}
+        <svg width="90" height="90"><rect x="20" y="60" width="50" height="8" rx="4" fill="#7c3aed"/><path d="M25,65 Q45,20 65,65" stroke="#bae6fd" stroke-width="6" fill="none"/><circle cx="45" cy="30" r="8" fill="#fff"/></svg>
+      {% elif sport['slug'] == 'boxing' %}
+        <svg width="90" height="90"><rect x="30" y="50" width="30" height="20" rx="8" fill="#ef4444"/><circle cx="45" cy="45" r="12" fill="#fff" stroke="#ef4444" stroke-width="6"/></svg>
+      {% elif sport['slug'] == 'basketball' %}
+        <svg width="90" height="90"><circle cx="45" cy="45" r="40" fill="#f59e42" stroke="#2563eb" stroke-width="8"/><path d="M15,45 Q45,45 75,45" stroke="#fff" stroke-width="4"/><path d="M45,15 Q45,45 45,75" stroke="#fff" stroke-width="4"/></svg>
+      {% elif sport['slug'] == 'volleyball' %}
+        <svg width="90" height="90"><circle cx="45" cy="45" r="40" fill="#fff" stroke="#60a5fa" stroke-width="8"/><path d="M15,45 Q45,15 75,45 Q45,75 15,45" stroke="#2563eb" stroke-width="4" fill="none"/></svg>
+      {% else %}
+        <svg width="90" height="90"><rect x="15" y="15" width="60" height="60" rx="18" fill="#e0e7ff" stroke="#2563eb" stroke-width="6"/></svg>
+      {% endif %}
+    </div>
+    <div class="sport-main">
+      <h1>{{ sport['name'] }}</h1>
+      <div class="desc">{{ sport['desc'] }}</div>
+      <h3>Недавние события:</h3>
+      <ul class="events-list">
+        {% for event in sport['events'] %}
+          <li>{{ event }}</li>
+        {% endfor %}
+      </ul>
+    </div>
+  </div>
+  <div class="comments-block">
+    <h2 style="color:#2a5d9f; margin-top:32px;">Комментарии:</h2>
+    {% if 'username' in session %}
+      <form action="{{ url_for('sport_page', sport_slug=sport['slug']) }}" method="post" class="comment-form">
+        <textarea name="text" placeholder="Ваш комментарий" required></textarea><br>
+        <button type="submit">Отправить</button>
+      </form>
+    {% else %}
+      <div class="links">
+        <a href="{{ url_for('register') }}">Зарегистрироваться</a> или войдите в шапке, чтобы оставить комментарий
+      </div>
+    {% endif %}
+    <div class="comments-list">
+      {% for c in comments %}
+        <div class="comment">
+          <b>{{c['author']}}</b>:<br>{{c['text']}}
+        </div>
+      {% else %}
+        <div class="no-comments">Комментариев пока нет.</div>
+      {% endfor %}
+    </div>
+  </div>
+  <a class="back" href="{{ url_for('choose_sport') }}">← К выбору спорта</a>
+</div>
+<style>
+.sport-info-card {
+  max-width: 800px;
+  margin: 40px auto;
+  background: #fff;
+  border-radius: 18px;
+  box-shadow: 0 4px 32px #2563eb22, 0 1.5px 8px #0001;
+  padding: 32px 32px 18px 32px;
+  position: relative;
+}
+.sport-info-flex {
+  display: flex;
+  gap: 32px;
+  flex-wrap: wrap;
+  align-items: flex-start;
+}
+.sport-img { display: flex; align-items: center; justify-content: center; min-width: 90px; min-height: 90px; }
+.sport-img svg { display: block; }
+.sport-main { flex: 1; min-width: 220px; }
+h1 { color: #2a5d9f; margin-bottom: 10px; }
+.desc { color: #444; margin-bottom: 18px; font-size: 1.1em; }
+.events-list { padding-left: 18px; margin-bottom: 0; }
+.events-list li { background: #f0f6ff; border-left: 4px solid #4fa3e3; margin-bottom: 7px; padding: 7px 12px; border-radius: 6px; color: #1d3e6e; font-size: 1em; }
+.comments-block { margin-top: 24px; }
+.comment-form textarea {
+  width: 100%; min-height: 70px; margin-bottom: 10px; border-radius: 8px; border: 1.5px solid #bfc9d1; padding: 10px; font-size: 1em; background: #f8fafc; transition: border 0.2s; }
+.comment-form textarea:focus { border: 1.5px solid #2a5d9f; outline: none; }
+.comment-form button { background: linear-gradient(90deg, #2a5d9f 60%, #4fa3e3 100%); color: #fff; border: none; border-radius: 8px; padding: 10px 24px; font-size: 1em; cursor: pointer; transition: background 0.2s; margin-top: 4px; }
+.comment-form button:hover { background: linear-gradient(90deg, #1d3e6e 60%, #2a5d9f 100%); }
+.comments-list { margin-top: 18px; }
+.comment { background: #f8fafc; border-left: 4px solid #2a5d9f; margin-bottom: 16px; padding: 12px 16px; border-radius: 8px; box-shadow: 0 1px 4px #0001; }
+.comment b { color: #2a5d9f; }
+.no-comments { color: #888; text-align: center; margin: 32px 0; }
+.links { text-align: center; margin-bottom: 18px; }
+.links a { color: #2a5d9f; text-decoration: none; margin: 0 8px; font-weight: 500; }
+.links a:hover { text-decoration: underline; }
+.back { margin-top: 18px; display: block; color: #2a5d9f; text-decoration: none; font-weight: 500; }
+.back:hover { text-decoration: underline; }
+@media (max-width: 700px) {
+  .sport-info-flex { flex-direction: column; gap: 18px; }
+  .sport-img { justify-content: flex-start; }
+  .sport-img svg { width: 70px; height: 70px; }
+  .sport-info-card { padding: 16px 4vw 12px 4vw; }
+}
+</style> 

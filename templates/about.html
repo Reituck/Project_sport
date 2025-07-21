@@ -1,0 +1,81 @@
+{% include 'header.html' %}
+<div class="container about-container">
+  <div class="about-header">
+    <div class="about-avatar">
+      <svg width="56" height="56" viewBox="0 0 48 48"><circle cx="24" cy="24" r="24" fill="#60a5fa"/><circle cx="24" cy="18" r="8" fill="#fff"/><ellipse cx="24" cy="34" rx="12" ry="8" fill="#fff"/></svg>
+    </div>
+    <div class="about-label">Об авторе</div>
+  </div>
+  <div class="about-block">
+    <p><b>Дымкова Алёна</b> — Кандидат в мастера спорта по художественной гимнастике.</p>
+    <ul>
+      <li>Победитель и призёр региональных и всероссийских соревнований по художественной гимнастике.</li>
+      <li>Участница крупных турниров, в том числе первенств России.</li>
+      <li>Известна своим артистизмом, сложными композициями с предметами и высоким уровнем исполнения.</li>
+      <li>Активно участвует в развитии гимнастики, делится опытом с молодыми спортсменками.</li>
+      <li>Входит в число перспективных гимнасток своего региона.</li>
+      <li>Публикации и интервью с Алёной можно найти на спортивных порталах и в соцсетях.</li>
+    </ul>
+    <p>Этот сайт создан для популяризации спорта и поддержки молодых спортсменов!</p>
+  </div>
+</div>
+<style>
+.about-container {
+  max-width: 600px;
+  margin: 40px auto 0 auto;
+  position: relative;
+  background: linear-gradient(120deg, #fafdff 60%, #e0e7ff 100%);
+  border-radius: 18px;
+  box-shadow: 0 6px 32px #2563eb22, 0 1.5px 8px #0001;
+  padding: 0 0 32px 0;
+  overflow: hidden;
+  transition: box-shadow 0.3s;
+}
+.about-header {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  background: linear-gradient(90deg, #60a5fa 0%, #bae6fd 100%);
+  border-radius: 18px 18px 0 0;
+  box-shadow: 0 2px 12px #60a5fa22;
+  padding: 24px 32px 18px 32px;
+  position: relative;
+}
+.about-avatar {
+  width: 56px; height: 56px; border-radius: 50%; background: #fff; display: flex; align-items: center; justify-content: center; box-shadow: 0 2px 12px #60a5fa33; }
+.about-label { color: #2563eb; font-weight: 700; font-size: 1.3em; letter-spacing: 0.5px; text-align: center; text-shadow: 0 2px 8px #bae6fd88; }
+.about-block {
+  background: #fff;
+  color: #1e293b;
+  border-radius: 0 0 14px 14px;
+  box-shadow: 0 4px 24px #2563eb11, 0 1.5px 8px #0001;
+  padding: 28px 32px 18px 32px;
+  margin-top: 0;
+  font-size: 1.1em;
+  transition: background 0.3s, color 0.3s;
+}
+.about-block ul { margin: 18px 0 0 0; padding-left: 22px; }
+.about-block li { margin-bottom: 8px; }
+.about-block a { color: #2563eb; text-decoration: underline; }
+.about-block a:hover { color: #7c3aed; }
+@media (max-width: 700px) {
+  .about-header { flex-direction: column; gap: 8px; padding: 18px 6vw 10px 6vw; }
+  .about-block { padding: 14px 6vw; }
+  .about-avatar { width: 44px; height: 44px; }
+}
+.dark-theme .about-container {
+  background: linear-gradient(120deg, #232b3b 60%, #312e81 100%);
+  box-shadow: 0 6px 32px #7c3aed44, 0 1.5px 8px #0002;
+}
+.dark-theme .about-header {
+  background: linear-gradient(90deg, #312e81 0%, #7c3aed 100%);
+  box-shadow: 0 2px 12px #7c3aed33;
+}
+.dark-theme .about-block {
+  background: #312e81;
+  color: #e0e7ff;
+  box-shadow: 0 4px 24px #7c3aed22, 0 1.5px 8px #0002;
+}
+.dark-theme .about-block a { color: #bae6fd; }
+.dark-theme .about-block a:hover { color: #fff; }
+</style> 

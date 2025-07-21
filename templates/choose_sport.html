@@ -1,0 +1,104 @@
+{% set main_slugs = ['football','gymnastics','basketball','volleyball','tennis','boxing'] %}
+{% include 'header.html' %}
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+<div class="container">
+  <h1>Выберите вид спорта</h1>
+  <div style="display:flex;gap:12px;align-items:center;justify-content:center;margin-bottom:18px;flex-wrap:wrap;position:relative;">
+    <div style="position:relative;width:260px;">
+      <input id="sport-search" type="text" placeholder="Поиск по видам спорта..." autocomplete="off" style="width:100%;padding:10px;font-size:1em;border-radius:6px;border:1px solid #bfc9d1;">
+      <ul id="autocomplete-list" class="autocomplete-list"></ul>
+    </div>
+  </div>
+  <div class="sports-list" id="main-sports">
+    {% for slug in main_slugs %}
+      {% for s in sports if s['slug'] == slug %}
+        <div class="sport-card" data-name="{{s['name']}}" data-desc="{{s['desc']}}">
+          <div class="sport-icon">
+            {% if s['slug'] == 'football' %}<i class="fa-solid fa-futbol"></i>{% endif %}
+            {% if s['slug'] == 'tennis' %}<i class="fa-solid fa-table-tennis-paddle-ball"></i>{% endif %}
+            {% if s['slug'] == 'gymnastics' %}<i class="fa-solid fa-person-running"></i>{% endif %}
+            {% if s['slug'] == 'boxing' %}<i class="fa-solid fa-hand-fist"></i>{% endif %}
+            {% if s['slug'] == 'basketball' %}<i class="fa-solid fa-basketball"></i>{% endif %}
+            {% if s['slug'] == 'parachuting' %}<i class="fa-solid fa-parachute-box"></i>{% endif %}
+            {% if s['slug'] == 'volleyball' %}<i class="fa-solid fa-volleyball"></i>{% endif %}
+          </div>
+          <h2>{{s['name']}}</h2>
+          <p>{{s['desc']}}</p>
+          <a href="{{ url_for('sport_page', sport_slug=s['slug']) }}" class="details-btn">Подробнее</a>
+        </div>
+      {% endfor %}
+    {% endfor %}
+  </div>
+</div>
+<script>
+const search = document.getElementById('sport-search');
+const autocompleteList = document.getElementById('autocomplete-list');
+const allSports = [{% for s in sports if s['slug'] in main_slugs %}'{{s['name']}}',{% endfor %}];
+
+search.addEventListener('input', function() {
+  const val = this.value.toLowerCase();
+  document.querySelectorAll('.sport-card').forEach(card => {
+    const name = card.getAttribute('data-name').toLowerCase();
+    const desc = card.getAttribute('data-desc').toLowerCase();
+    card.style.display = (name.includes(val) || desc.includes(val)) ? '' : 'none';
+  });
+  // автодополнение
+  autocompleteList.innerHTML = '';
+  if(val.length > 0) {
+    const matches = allSports.filter(s => s.toLowerCase().includes(val));
+    matches.slice(0,8).forEach(sport => {
+      const li = document.createElement('li');
+      li.textContent = sport;
+      li.onclick = function() {
+        search.value = sport;
+        autocompleteList.innerHTML = '';
+        document.querySelectorAll('.sport-card').forEach(card => {
+          card.style.display = (card.getAttribute('data-name') === sport) ? '' : 'none';
+        });
+      };
+      autocompleteList.appendChild(li);
+    });
+    autocompleteList.style.display = matches.length ? 'block' : 'none';
+  } else {
+    autocompleteList.style.display = 'none';
+  }
+});
+document.addEventListener('click', function(e) {
+  if(!search.contains(e.target)) autocompleteList.style.display = 'none';
+});
+</script>
+<style>
+.autocomplete-list {
+  position: absolute;
+  left: 0; right: 0; top: 44px;
+  background: #fff;
+  border: 1px solid #bfc9d1;
+  border-radius: 0 0 8px 8px;
+  box-shadow: 0 2px 8px #0001;
+  z-index: 10;
+  list-style: none;
+  margin: 0; padding: 0;
+  max-height: 220px;
+  overflow-y: auto;
+  display: none;
+}
+.autocomplete-list li {
+  padding: 10px 16px;
+  cursor: pointer;
+  font-size: 1em;
+  color: #2a5d9f;
+  transition: background 0.2s;
+}
+.autocomplete-list li:hover {
+  background: #f0f6ff;
+}
+.container { max-width: 900px; margin: 40px auto; background: #fff; border-radius: 12px; box-shadow: 0 2px 12px #0001; padding: 32px 28px; }
+h1 { color: #2a5d9f; text-align: center; margin-bottom: 24px; }
+.sports-list { display: flex; flex-wrap: wrap; gap: 18px; justify-content: center; }
+.sport-card { background: #f8fafc; border-left: 4px solid #2a5d9f; border-radius: 8px; box-shadow: 0 1px 4px #0001; padding: 18px 22px; width: 220px; min-height: 120px; display: flex; flex-direction: column; justify-content: space-between; align-items: center; transition: box-shadow 0.3s, transform 0.3s; animation: fadeIn 0.7s; }
+.sport-card:hover { box-shadow: 0 6px 24px #2563eb33; transform: translateY(-4px) scale(1.03); }
+.sport-icon { font-size: 2.2em; color: #2563eb; margin-bottom: 8px; }
+.details-btn { align-self: flex-end; color: #fff; background: #2a5d9f; border-radius: 5px; padding: 6px 16px; text-decoration: none; font-weight: 500; transition: background 0.2s, box-shadow 0.2s; box-shadow: 0 1px 4px #2563eb22; }
+.details-btn:hover { background: #1d3e6e; box-shadow: 0 2px 8px #2563eb33; }
+@keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: none; } }
+</style> 

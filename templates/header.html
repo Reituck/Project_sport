@@ -1,0 +1,277 @@
+<div class="header glass-header">
+  <div class="header-content" style="display:flex;justify-content:space-between;align-items:center;padding-left:0;gap:0;">
+    <div class="header-left" style="display:flex;align-items:center;gap:18px;">
+      <span class="site-title" style="margin-left:0;padding-left:0;"><a href="{{ url_for('choose_sport') }}">СпортПортал</a></span>
+      <a class="header-btn about-btn" href="{{ url_for('about') }}" style="opacity:0.7;backdrop-filter:blur(2px);">Об авторе</a>
+    </div>
+    <div style="flex:1;"></div>
+    <div class="header-right" style="display:flex;align-items:center;gap:18px;">
+      <a class="header-btn" href="{{ url_for('register') }}">Регистрация</a>
+      {% if 'username' in session %}
+        <div class="user-profile">
+          <div class="avatar">{{ session['username'][0]|upper }}</div>
+          <span class="user-name">{{ session['username'] }}</span>
+          <a class="header-btn" href="{{ url_for('logout') }}">Выйти</a>
+        </div>
+      {% else %}
+        <div id="auth-block" style="display:inline-block;">
+          <button id="show-auth-form" class="header-btn" type="button">Авторизация</button>
+          <form id="auth-form" class="login-form" method="post" action="{{ url_for('login_in_header') }}" style="display:none;position:absolute;z-index:10;background:#fff;border-radius:8px;box-shadow:0 2px 12px #2563eb22;padding:14px 18px;right:0;top:48px;min-width:220px;">
+            <input type="text" name="username" placeholder="Логин" required style="width:100%;margin-bottom:8px;">
+            <input type="password" name="password" placeholder="Пароль" required style="width:100%;margin-bottom:8px;">
+            <button type="submit" style="width:100%;">Войти</button>
+          </form>
+        </div>
+        {% if login_error %}<span class="login-error">{{ login_error }}</span>{% endif %}
+      {% endif %}
+      <button id="theme-toggle" class="theme-toggle" title="Переключить тему">🌙</button>
+    </div>
+  </div>
+</div>
+<div id="toast-container"></div>
+<div id="theme-overlay"></div>
+<style>
+body {
+  background: linear-gradient(135deg, #fafdff 0%, #e0e7ff 40%, #bae6fd 100%);
+  min-height: 100vh;
+  margin: 0;
+  transition: background 2.5s cubic-bezier(.4,0,.2,1);
+}
+.glass-header {
+  background: rgba(255,255,255,0.82);
+  backdrop-filter: blur(14px);
+  box-shadow: 0 2px 24px #60a5fa22;
+  border-bottom: 1.5px solid #e0e7ff;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+.header-content {
+  max-width: 1100px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 18px;
+  flex-wrap: wrap;
+  gap: 8px;
+  position:relative;
+  min-height:56px;
+}
+.site-title a {
+  color: #2563eb;
+  font-size: 1.5em;
+  font-weight: bold;
+  text-decoration: none;
+  letter-spacing: 1px;
+  text-shadow: 0 2px 8px #bae6fd88;
+  white-space:nowrap;
+}
+.header-auth {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+.header-btn, .login-form button {
+  background: linear-gradient(90deg, #2563eb 60%, #60a5fa 100%);
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  padding: 8px 20px;
+  font-size: 1em;
+  text-decoration: none;
+  font-weight: 500;
+  transition: background 0.2s, box-shadow 0.2s, color 0.2s;
+  cursor: pointer;
+  display: inline-block;
+  box-shadow: 0 1px 8px #60a5fa22;
+}
+.header-btn:hover, .login-form button:hover {
+  background: linear-gradient(90deg, #1e40af 60%, #2563eb 100%);
+  color: #fff;
+  box-shadow: 0 2px 12px #2563eb33;
+}
+.login-form input[type="text"], .login-form input[type="password"] {
+  padding: 6px 10px;
+  border-radius: 4px;
+  border: 1px solid #bfc9d1;
+  font-size: 1em;
+  background: #fafdff;
+}
+.login-error {
+  color: #ffd6d6;
+  background: #d32f2f;
+  border-radius: 4px;
+  padding: 2px 8px;
+  margin-left: 10px;
+  font-size: 0.98em;
+}
+.user-profile {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  position: relative;
+}
+.avatar {
+  width: 36px; height: 36px; background: #60a5fa; color: #fff; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.2em; font-weight: bold; box-shadow: 0 1px 4px #60a5fa44; }
+.user-name { color: #2563eb; font-weight: 500; }
+.theme-toggle { background: none; border: none; color: #2563eb; font-size: 1.3em; margin-left: 12px; cursor: pointer; transition: color 0.2s; }
+.theme-toggle:hover { color: #7c3aed; }
+#toast-container {
+  position: fixed;
+  top: 24px;
+  right: 24px;
+  z-index: 9999;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+.toast {
+  min-width: 220px;
+  max-width: 340px;
+  background: #2563eb;
+  color: #fff;
+  padding: 14px 22px;
+  border-radius: 8px;
+  box-shadow: 0 2px 12px #0003;
+  font-size: 1em;
+  opacity: 0.97;
+  animation: toastIn 0.5s;
+}
+.toast-success { background: #22c55e; }
+.toast-error { background: #ef4444; }
+@keyframes toastIn { from { opacity: 0; transform: translateY(-20px); } to { opacity: 0.97; transform: none; } }
+#theme-overlay {
+  pointer-events: none;
+  position: fixed;
+  left: 0; top: 0; right: 0; bottom: 0;
+  background: radial-gradient(ellipse at 70% 30%, rgba(255,255,255,0.0) 40%, rgba(0,0,0,0.32) 100%);
+  opacity: 0;
+  z-index: 99999;
+  transition: opacity 2.5s cubic-bezier(.4,0,.2,1);
+}
+#theme-overlay.active {
+  opacity: 1;
+}
+.footer {
+  background: rgba(96,165,250,0.15);
+  color: #2563eb;
+  text-align: center;
+  padding: 18px 0 10px 0;
+  margin-top: 40px;
+  font-size: 1em;
+  border-top: 1.5px solid #e0e7ff;
+  backdrop-filter: blur(8px);
+}
+.footer a { color: #7c3aed; text-decoration: underline; }
+.footer a:hover { color: #2563eb; }
+.footer-content { max-width: 900px; margin: 0 auto; display: flex; flex-wrap: wrap; justify-content: center; align-items: center; gap: 8px; }
+@media (max-width: 700px) {
+  .header-content { flex-direction: column; gap: 8px; padding: 8px 2vw; }
+  .header-auth { flex-direction: column; gap: 6px; }
+  .user-profile { gap: 4px; }
+  .avatar { width: 30px; height: 30px; font-size: 1em; }
+  .site-title a { font-size: 1.1em; }
+}
+/* Тёмная тема */
+.dark-theme {
+  background: linear-gradient(135deg, #18181b 0%, #312e81 60%, #7c3aed 100%);
+  transition: background 2.5s cubic-bezier(.4,0,.2,1);
+}
+.dark-theme .glass-header {
+  background: rgba(24,24,27,0.90);
+  box-shadow: 0 2px 24px #7c3aed33;
+  border-bottom: 1.5px solid #312e81;
+}
+.dark-theme .container, .dark-theme .sport-info-card {
+  background: rgba(36, 32, 54, 0.92) !important;
+  color: #e0e7ff;
+  box-shadow: 0 4px 32px #7c3aed22, 0 1.5px 8px #0002;
+}
+.dark-theme h1, .dark-theme h2, .dark-theme h3, .dark-theme .site-title a {
+  color: #a5b4fc !important;
+  text-shadow: 0 2px 8px #312e8188;
+}
+.dark-theme .sport-card, .dark-theme .comment, .dark-theme .events-list li {
+  background: rgba(36, 32, 54, 0.92) !important;
+  color: #e0e7ff;
+  box-shadow: 0 1px 8px #7c3aed33;
+}
+.dark-theme .details-btn, .dark-theme .header-btn, .dark-theme .login-form button, .dark-theme .comment-form button {
+  background: linear-gradient(90deg, #7c3aed 60%, #312e81 100%) !important;
+  color: #fff !important;
+  box-shadow: 0 1px 8px #7c3aed33;
+}
+.dark-theme .header {
+  background: rgba(24,24,27,0.90) !important;
+}
+.dark-theme .avatar {
+  background: #7c3aed;
+  box-shadow: 0 1px 4px #7c3aed44;
+}
+.dark-theme .user-name, .dark-theme .theme-toggle {
+  color: #a5b4fc;
+}
+.dark-theme .footer {
+  background: rgba(49,46,129,0.25);
+  color: #a5b4fc;
+  border-top: 1.5px solid #312e81;
+}
+.dark-theme .footer a { color: #bae6fd; }
+.dark-theme .footer a:hover { color: #fff; }
+</style>
+<script>
+// Переключение темы с плавной маской
+const themeBtn = document.getElementById('theme-toggle');
+const overlay = document.getElementById('theme-overlay');
+if(themeBtn) {
+  themeBtn.onclick = function() {
+    overlay.classList.add('active');
+    setTimeout(() => {
+      document.body.classList.toggle('dark-theme');
+      localStorage.setItem('theme', document.body.classList.contains('dark-theme') ? 'dark' : 'light');
+      themeBtn.textContent = document.body.classList.contains('dark-theme') ? '☀️' : '🌙';
+      setTimeout(()=>overlay.classList.remove('active'), 1800);
+    }, 700);
+  };
+  // При загрузке
+  if(localStorage.getItem('theme') === 'dark') {
+    document.body.classList.add('dark-theme');
+    themeBtn.textContent = '☀️';
+  }
+}
+window.showToast = function(msg, type='') {
+  const c = document.getElementById('toast-container');
+  const t = document.createElement('div');
+  t.className = 'toast' + (type ? ' toast-' + type : '');
+  t.textContent = msg;
+  c.appendChild(t);
+  setTimeout(() => { t.style.opacity = 0; setTimeout(()=>c.removeChild(t), 400); }, 3000);
+};
+const showAuthBtn = document.getElementById('show-auth-form');
+const authForm = document.getElementById('auth-form');
+if(showAuthBtn && authForm) {
+  showAuthBtn.onclick = function() {
+    authForm.style.display = authForm.style.display === 'none' ? 'block' : 'none';
+    if(authForm.style.display === 'block') authForm.querySelector('input').focus();
+  };
+  document.addEventListener('click', function(e) {
+    if(!authForm.contains(e.target) && e.target !== showAuthBtn) authForm.style.display = 'none';
+  });
+}
+</script>
+<footer class="footer">
+  <div class="footer-content">
+    <span>© 2024 СпортПортал</span>
+    <span style="margin-left:18px;">Контакты: <a href="mailto:support@sportportal.ru">support@sportportal.ru</a></span>
+    <span style="margin-left:18px;"><a href="#about">О сайте</a></span>
+    <span style="margin-left:18px;"><a href="#faq">FAQ</a></span>
+  </div>
+</footer>
+<style>
+.footer { background: #2a5d9f; color: #fff; text-align: center; padding: 18px 0 10px 0; margin-top: 40px; font-size: 1em; }
+.footer a { color: #ffd700; text-decoration: underline; }
+.footer a:hover { color: #fff; }
+.footer-content { max-width: 900px; margin: 0 auto; display: flex; flex-wrap: wrap; justify-content: center; align-items: center; gap: 8px; }
+</style> 

@@ -1,0 +1,20 @@
+{% include 'header.html' %}
+<div class="container">
+  <h1>Регистрация</h1>
+  <form method="post">
+    <input type="text" name="username" placeholder="Логин" required style="width:100%;padding:10px;margin-bottom:10px;border-radius:6px;border:1px solid #bfc9d1;">
+    <input type="password" name="password" placeholder="Пароль" required style="width:100%;padding:10px;margin-bottom:10px;border-radius:6px;border:1px solid #bfc9d1;">
+    <button type="submit">Зарегистрироваться</button>
+  </form>
+  <div class="links">Уже есть аккаунт? <a href="{{ url_for('choose_sport') }}">Войти</a></div>
+  {% if error %}<div class="error" style="color:#d32f2f;text-align:center;margin-top:10px;">{{ error }}</div>{% endif %}
+</div>
+<style>
+.container { max-width: 400px; margin: 60px auto; background: #fff; border-radius: 12px; box-shadow: 0 2px 12px #0001; padding: 32px 28px; }
+h1 { color: #2a5d9f; text-align: center; margin-bottom: 24px; }
+.links { text-align: center; margin-bottom: 18px; }
+.links a { color: #2a5d9f; text-decoration: none; margin: 0 8px; font-weight: 500; }
+.links a:hover { text-decoration: underline; }
+button { background: linear-gradient(90deg, #2a5d9f 60%, #4fa3e3 100%); color: #fff; border: none; border-radius: 6px; padding: 10px 24px; font-size: 1em; cursor: pointer; transition: background 0.2s; margin-top: 4px; width: 100%; }
+button:hover { background: linear-gradient(90deg, #1d3e6e 60%, #2a5d9f 100%); }
+</style> 
