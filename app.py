@@ -147,5 +147,9 @@ def login_in_header():
         # Передаём ошибку обратно на предыдущую страницу
         return redirect(url_for('choose_sport', login_error='Неверный логин или пароль'))
 
+@app.route('/about')
+def about():
+    return render_template('about.html')
+
 if __name__ == '__main__':
     app.run(debug=True) 

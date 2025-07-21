@@ -83,3 +83,24 @@
 [2025-07-21 09:01:49] view_choose_sport | user: -
 [2025-07-21 09:02:11] view_sport | user: - | sport: gymnastics
 [2025-07-21 09:03:29] view_choose_sport | user: -
+[2025-07-21 09:05:55] view_choose_sport | user: -
+[2025-07-21 09:08:11] view_choose_sport | user: -
+[2025-07-21 09:10:02] view_choose_sport | user: -
+[2025-07-21 09:15:39] view_choose_sport | user: -
+[2025-07-21 09:15:43] view_sport | user: - | sport: football
+[2025-07-21 09:19:21] view_choose_sport | user: -
+[2025-07-21 09:19:22] view_sport | user: - | sport: football
+[2025-07-21 09:19:34] view_sport | user: - | sport: gymnastics
+[2025-07-21 09:19:38] view_sport | user: - | sport: football
+[2025-07-21 09:19:40] view_sport | user: - | sport: basketball
+[2025-07-21 09:22:16] view_choose_sport | user: -
+[2025-07-21 09:24:19] view_choose_sport | user: -
+[2025-07-21 09:24:33] view_choose_sport | user: -
+[2025-07-21 09:24:41] view_choose_sport | user: -
+[2025-07-21 09:25:54] view_choose_sport | user: -
+[2025-07-21 09:27:23] view_choose_sport | user: -
+[2025-07-21 09:29:08] view_choose_sport | user: -
+[2025-07-21 09:30:00] view_choose_sport | user: -
+[2025-07-21 09:30:40] view_choose_sport | user: -
+[2025-07-21 09:32:59] view_choose_sport | user: -
+[2025-07-21 09:33:05] view_sport | user: - | sport: gymnastics
